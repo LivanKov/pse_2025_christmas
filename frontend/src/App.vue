@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container">
     <h1>{{ title }}</h1>
     <div v-if="message" class="message">
       {{ message }}
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style>
-#app {
+.container {
   font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 0 auto;
