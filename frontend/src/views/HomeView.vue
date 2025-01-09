@@ -8,7 +8,9 @@
         <div class="login-box">
           <div class="snowflake-icon">❄️</div>
           <h1>Welcome Back</h1>
-          <form @submit.prevent="handleLogin" class="login-form">
+          
+          <!-- Customer Login Form -->
+          <form v-if="!isVendorLogin" @submit.prevent="handleLogin" class="login-form">
             <div class="form-group">
               <input 
                 type="email" 
@@ -29,8 +31,37 @@
               Sign In
             </button>
           </form>
-          <div class="forgot-password">
-            <a href="#">Forgot your password?</a>
+
+          <!-- Vendor Login Form -->
+          <form v-else @submit.prevent="handleVendorLogin" class="login-form">
+            <div class="form-group">
+              <input 
+                type="text" 
+                v-model="vendorId" 
+                placeholder="Vendor ID"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input 
+                type="password" 
+                v-model="vendorPassword" 
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button type="submit" class="login-button">
+              Sign In as Vendor
+            </button>
+          </form>
+
+          <div class="login-options">
+            <div class="forgot-password">
+              <a href="#">Forgot your password?</a>
+            </div>
+            <button @click="toggleLoginType" class="toggle-login-button">
+              {{ isVendorLogin ? 'Customer? Click here!' : 'Vendor? Click here!' }}
+            </button>
           </div>
         </div>
       </div>
@@ -47,13 +78,26 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      vendorId: '',
+      vendorPassword: '',
+      isVendorLogin: false
     }
   },
   methods: {
     async handleLogin() {
-      // TODO: Implement login logic
-      console.log('Login attempted with:', this.email)
+      console.log('Customer login attempted with:', this.email)
+    },
+    async handleVendorLogin() {
+      console.log('Vendor login attempted with ID:', this.vendorId)
+    },
+    toggleLoginType() {
+      this.isVendorLogin = !this.isVendorLogin
+      // Reset form fields when switching
+      this.email = ''
+      this.password = ''
+      this.vendorId = ''
+      this.vendorPassword = ''
     }
   }
 }
@@ -232,5 +276,29 @@ input:focus {
 .snow-hills::after {
   right: -50%;
   transform: scale(1.5);
+}
+
+.login-options {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.toggle-login-button {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px 10px;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.toggle-login-button:hover {
+  color: #2980B9;
+  transform: translateY(-1px);
 }
 </style>
