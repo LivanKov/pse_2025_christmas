@@ -1,59 +1,10 @@
 <template>
-  <div class="app-container">
-    <div class="snowflake-1"></div>
-    <div class="snowflake-2"></div>
-    <div class="snowflake-3"></div>
-    <div class="login-container">
-      <div class="login-box">
-        <div class="snowflake-icon">❄️</div>
-        <h1>Welcome Back</h1>
-        <form @submit.prevent="handleLogin" class="login-form">
-          <div class="form-group">
-            <input 
-              type="email" 
-              v-model="email" 
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <input 
-              type="password" 
-              v-model="password" 
-              placeholder="Password"
-              required
-            />
-          </div>
-          <button type="submit" class="login-button">
-            Sign In
-          </button>
-        </form>
-        <div class="forgot-password">
-          <a href="#">Forgot your password?</a>
-        </div>
-      </div>
-    </div>
-    <div class="ground">
-      <div class="snow-hills"></div>
-    </div>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  data() {
-    return {
-      email: '',
-      password: ''
-    }
-  },
-  methods: {
-    async handleLogin() {
-      // TODO: Implement login logic
-      console.log('Login attempted with:', this.email)
-    }
-  }
+  name: 'App'
 }
 </script>
 
