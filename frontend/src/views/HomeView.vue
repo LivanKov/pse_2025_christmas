@@ -60,33 +60,40 @@ export default {
 </script>
 
 <style scoped>
-/* Copy the styles from App.vue */
 .app-container {
-  position: relative;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1e90ff 0%, #4169e1 100%);
+  background: linear-gradient(180deg, 
+    #a8e6ff 0%, 
+    #ECF0F1 60%, 
+    #FFFFFF 60%, 
+    #FFFFFF 100%
+  );
+  position: relative;
   overflow: hidden;
 }
 
 .login-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  padding-left: 15%;
+  position: relative;
+  z-index: 2;
 }
 
 .login-box {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  width: 100%;
+  max-width: 400px;
   text-align: center;
   position: relative;
-  z-index: 1;
-  backdrop-filter: blur(10px);
-  max-width: 400px;
-  width: 100%;
+  backdrop-filter: blur(4px);
+  z-index: 2;
 }
 
 .snowflake-icon {
@@ -94,8 +101,11 @@ export default {
   margin-bottom: 20px;
 }
 
-.login-form {
-  margin-top: 30px;
+h1 {
+  color: var(--text-color);
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .form-group {
@@ -104,32 +114,36 @@ export default {
 
 input {
   width: 100%;
-  padding: 12px;
-  border: 2px solid #e1e1e1;
-  border-radius: 8px;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
   font-size: 16px;
-  transition: border-color 0.3s;
+  transition: all 0.3s ease;
+  background: var(--snow-color);
 }
 
 input:focus {
-  border-color: #4169e1;
   outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
 .login-button {
   width: 100%;
   padding: 12px;
-  background: #4169e1;
-  color: white;
+  background: linear-gradient(135deg, var(--accent-color) 0%, #2980B9 100%);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  color: white;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
 .login-button:hover {
-  background: #1e90ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
 }
 
 .forgot-password {
@@ -137,66 +151,86 @@ input:focus {
 }
 
 .forgot-password a {
-  color: #4169e1;
+  color: var(--accent-color);
   text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .forgot-password a:hover {
+  color: #2980B9;
   text-decoration: underline;
 }
 
-/* Snowflakes */
+.snowflake {
+  position: fixed;
+  color: #fff;
+  font-size: 1.5em;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  animation: snowfall linear infinite;
+  z-index: 1;
+}
+
 @keyframes snowfall {
-  0% { transform: translateY(-100vh) rotate(0deg); }
-  100% { transform: translateY(100vh) rotate(360deg); }
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
 }
 
-.snowflake-1,
-.snowflake-2,
-.snowflake-3 {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
+.app-container::before,
+.app-container::after,
+.snowflake-1::before,
+.snowflake-2::before,
+.snowflake-3::before {
+  content: "❄";
+  position: fixed;
+  top: -20px;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  z-index: 1;
 }
 
-.snowflake-1 {
-  left: 20%;
-  animation: snowfall 15s linear infinite;
-}
+.app-container::before { left: 20%; animation: snowfall 15s linear infinite; font-size: 30px; }
+.app-container::after { left: 40%; animation: snowfall 12s linear infinite; font-size: 25px; }
+.snowflake-1::before { left: 60%; animation: snowfall 10s linear infinite; font-size: 35px; }
+.snowflake-2::before { left: 80%; animation: snowfall 14s linear infinite; font-size: 28px; }
+.snowflake-3::before { left: 90%; animation: snowfall 13s linear infinite; font-size: 32px; }
 
-.snowflake-2 {
-  left: 50%;
-  animation: snowfall 12s linear infinite;
-  animation-delay: -5s;
-}
-
-.snowflake-3 {
-  left: 80%;
-  animation: snowfall 10s linear infinite;
-  animation-delay: -2s;
-}
-
-/* Ground with snow hills */
 .ground {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  height: 100px;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.8) 0%,
+    #FFFFFF 20%
+  );
+  z-index: 1;
 }
 
-.snow-hills {
+.snow-hills::before,
+.snow-hills::after {
+  content: "";
   position: absolute;
-  bottom: 0;
+  bottom: 39vh;
   width: 100%;
-  height: 60px;
-  background: white;
-  border-radius: 100% 100% 0 0;
+  height: 80px;
+  background: #FFFFFF;
+  border-radius: 50% 50% 0 0;
+  z-index: 1;
 }
 
-h1 {
-  color: #333;
-  margin-bottom: 20px;
+.snow-hills::before {
+  left: -50%;
+  transform: scale(2);
+}
+
+.snow-hills::after {
+  right: -50%;
+  transform: scale(1.5);
 }
 </style>
