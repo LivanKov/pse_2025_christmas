@@ -6,8 +6,8 @@ package org.acme.user;
 public class Visitor extends AbstractUser {
     private String shippingAddress;
 
-    public Visitor(String id, String email, String passwordHash, String shippingAddress) {
-        super(id, email, passwordHash);
+    public Visitor(String id, String email, String shippingAddress) {
+        super(id, email);
         this.shippingAddress = shippingAddress;
     }
 

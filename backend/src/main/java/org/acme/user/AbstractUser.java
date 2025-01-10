@@ -8,13 +8,11 @@ import java.util.Objects;
 public abstract class AbstractUser implements User {
     private final String id;
     private final String email;
-    private final String passwordHash;
     private boolean active;
 
-    protected AbstractUser(String id, String email, String passwordHash) {
+    protected AbstractUser(String id, String email) {
         this.id = id;
         this.email = email;
-        this.passwordHash = passwordHash;
         this.active = true;
     }
 
@@ -26,11 +24,6 @@ public abstract class AbstractUser implements User {
     @Override
     public String getEmail() {
         return email;
-    }
-
-    @Override
-    public String getPasswordHash() {
-        return passwordHash;
     }
 
     @Override

@@ -7,8 +7,8 @@ public class Admin extends AbstractUser {
     private String department;
     private int securityClearanceLevel;
 
-    public Admin(String id, String email, String passwordHash, String department, int securityClearanceLevel) {
-        super(id, email, passwordHash);
+    public Admin(String id, String email, String department, int securityClearanceLevel) {
+        super(id, email);
         this.department = department;
         this.securityClearanceLevel = securityClearanceLevel;
     }

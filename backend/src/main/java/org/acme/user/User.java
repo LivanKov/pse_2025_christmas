@@ -18,12 +18,6 @@ public interface User {
     String getEmail();
 
     /**
-     * Get the user's password hash.
-     * @return the hashed password
-     */
-    String getPasswordHash();
-
-    /**
      * Get the user's role in the system.
      * @return the user role
      */
