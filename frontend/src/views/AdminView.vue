@@ -12,20 +12,22 @@
           <h2>Admin Dashboard</h2>
           <p class="description">Access the administrative controls for the Christmas gift management system.</p>
           
-          <form @submit.prevent="handleAdminLogin" class="login-form">
+          <form @submit.prevent="handleLogin" class="login-form">
             <div class="form-group">
-              <label>Email address</label>
+              <label for="email">Email address</label>
               <input 
                 type="email" 
+                id="email"
                 v-model="email" 
                 placeholder="admin@northpole.com"
                 required
               />
             </div>
             <div class="form-group">
-              <label>Password</label>
+              <label for="password">Password</label>
               <input 
                 type="password" 
+                id="password"
                 v-model="password" 
                 placeholder="Enter your password"
                 required
@@ -33,7 +35,7 @@
             </div>
             <div class="form-footer">
               <a href="#" class="forgot-password">Forgot your password?</a>
-              <button type="submit" class="login-button">Log in</button>
+              <button type="submit" class="login-button">Sign In</button>
             </div>
           </form>
 
@@ -60,9 +62,9 @@ export default {
     }
   },
   methods: {
-    async handleAdminLogin() {
-      // TODO: Implement actual admin login
-      console.log('Admin login attempted with:', this.email)
+    async handleLogin() {
+      console.log('Admin login attempted with:', this.email, 'and password:', this.password)
+      // Add your login logic here
     }
   }
 }

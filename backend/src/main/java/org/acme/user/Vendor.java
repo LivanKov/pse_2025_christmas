@@ -7,8 +7,8 @@ public class Vendor extends AbstractUser {
     private String companyName;
     private String businessId;
 
-    public Vendor(String id, String email, String companyName, String businessId) {
-        super(id, email);
+    public Vendor(String id, String email, String passwordHash, String companyName, String businessId) {
+        super(id, email, passwordHash);
         this.companyName = companyName;
         this.businessId = businessId;
     }
@@ -32,5 +32,10 @@ public class Vendor extends AbstractUser {
     @Override
     public UserRole getRole() {
         return UserRole.VENDOR;
+    }
+
+    @Override
+    public boolean requiresPassword() {
+        return true;
     }
 }

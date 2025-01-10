@@ -28,14 +28,6 @@
                 required
               />
             </div>
-            <div class="form-group">
-              <input 
-                type="password" 
-                v-model="password" 
-                placeholder="Password"
-                required
-              />
-            </div>
             <button type="submit" class="login-button">
               Sign In
             </button>
@@ -87,7 +79,6 @@ export default {
   data() {
     return {
       email: '',
-      password: '',
       vendorId: '',
       vendorPassword: '',
       isVendorLogin: false
@@ -98,13 +89,12 @@ export default {
       console.log('Customer login attempted with:', this.email)
     },
     async handleVendorLogin() {
-      console.log('Vendor login attempted with ID:', this.vendorId)
+      console.log('Vendor login attempted with ID:', this.vendorId, 'and password:', this.vendorPassword)
     },
     toggleLoginType() {
       this.isVendorLogin = !this.isVendorLogin
       // Reset form fields when switching
       this.email = ''
-      this.password = ''
       this.vendorId = ''
       this.vendorPassword = ''
     }

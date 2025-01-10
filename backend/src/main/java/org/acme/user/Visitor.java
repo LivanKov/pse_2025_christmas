@@ -23,4 +23,9 @@ public class Visitor extends AbstractUser {
     public UserRole getRole() {
         return UserRole.VISITOR;
     }
+
+    @Override
+    public boolean requiresPassword() {
+        return false;
+    }
 }

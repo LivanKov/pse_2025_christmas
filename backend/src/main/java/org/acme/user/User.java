@@ -28,4 +28,10 @@ public interface User {
      * @return true if the account is active, false otherwise
      */
     boolean isActive();
+
+    /**
+     * Check if this user type requires password authentication.
+     * @return true if password is required, false otherwise
+     */
+    boolean requiresPassword();
 }

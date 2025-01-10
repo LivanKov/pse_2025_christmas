@@ -7,8 +7,8 @@ public class Admin extends AbstractUser {
     private String department;
     private int securityClearanceLevel;
 
-    public Admin(String id, String email, String department, int securityClearanceLevel) {
-        super(id, email);
+    public Admin(String id, String email, String passwordHash, String department, int securityClearanceLevel) {
+        super(id, email, passwordHash);
         this.department = department;
         this.securityClearanceLevel = securityClearanceLevel;
     }
@@ -32,5 +32,10 @@ public class Admin extends AbstractUser {
     @Override
     public UserRole getRole() {
         return UserRole.ADMIN;
+    }
+
+    @Override
+    public boolean requiresPassword() {
+        return true;
     }
 }
