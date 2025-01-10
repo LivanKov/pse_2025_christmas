@@ -6,6 +6,15 @@
       <div class="snowflake-3"></div>
       <div class="login-container">
         <div class="login-box">
+          <div class="login-type-indicator">
+            <div class="indicator-line">
+              <div class="indicator-highlight" :class="{ 'vendor': isVendorLogin }"></div>
+            </div>
+            <div class="indicator-labels">
+              <span :class="{ 'active': !isVendorLogin }">Customer</span>
+              <span :class="{ 'active': isVendorLogin }">Vendor</span>
+            </div>
+          </div>
           <div class="snowflake-icon">❄️</div>
           <h1>Welcome Back</h1>
           
@@ -300,5 +309,49 @@ input:focus {
 .toggle-login-button:hover {
   color: #2980B9;
   transform: translateY(-1px);
+}
+
+.login-type-indicator {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.indicator-line {
+  height: 3px;
+  background-color: #e0e0e0;
+  position: relative;
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+
+.indicator-highlight {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color) 0%, #2980B9 100%);
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0%);
+}
+
+.indicator-highlight.vendor {
+  transform: translateX(100%);
+}
+
+.indicator-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 0 10px;
+}
+
+.indicator-labels span {
+  font-size: 14px;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.indicator-labels span.active {
+  color: var(--accent-color);
+  font-weight: 500;
 }
 </style>
