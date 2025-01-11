@@ -73,50 +73,42 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HomeView',
-  data() {
-    return {
-      email: '',
-      vendorId: '',
-      vendorPassword: '',
-      isVendorLogin: false
-    }
-  },
-  methods: {
-    async handleLogin() {
-      if (this.email.trim()) {
-        // Navigate to dashboard with customer type
-        this.$router.push({
-          name: 'dashboard',
-          params: {
-            type: 'customer',
-            identifier: this.email
-          }
-        })
-      }
-    },
-    async handleVendorLogin() {
-      if (this.vendorId.trim() && this.vendorPassword.trim()) {
-        // Navigate to dashboard with vendor type
-        this.$router.push({
-          name: 'dashboard',
-          params: {
-            type: 'vendor',
-            identifier: this.vendorId
-          }
-        })
-      }
-    },
-    toggleLoginType() {
-      this.isVendorLogin = !this.isVendorLogin
-      // Reset form fields when switching
-      this.email = ''
-      this.vendorId = ''
-      this.vendorPassword = ''
-    }
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+const email = ref('')
+const vendorId = ref('')
+const vendorPassword = ref('')
+const isVendorLogin = ref(false)
+
+async function handleLogin() {
+  if (email.value.trim()) {
+    authStore.login('visitor', { username: email.value })
+    router.push('/dashboard')
   }
+}
+
+async function handleVendorLogin() {
+  if (vendorId.value.trim() && vendorPassword.value.trim()) {
+    authStore.login('vendor', { 
+      username: vendorId.value,
+      password: vendorPassword.value 
+    })
+    router.push('/dashboard')
+  }
+}
+
+function toggleLoginType() {
+  isVendorLogin.value = !isVendorLogin.value
+  // Reset form fields when switching
+  email.value = ''
+  vendorId.value = ''
+  vendorPassword.value = ''
 }
 </script>
 
