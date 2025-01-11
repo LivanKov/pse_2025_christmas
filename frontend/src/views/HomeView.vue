@@ -86,10 +86,28 @@ export default {
   },
   methods: {
     async handleLogin() {
-      console.log('Customer login attempted with:', this.email)
+      if (this.email.trim()) {
+        // Navigate to dashboard with customer type
+        this.$router.push({
+          name: 'dashboard',
+          params: {
+            type: 'customer',
+            identifier: this.email
+          }
+        })
+      }
     },
     async handleVendorLogin() {
-      console.log('Vendor login attempted with ID:', this.vendorId, 'and password:', this.vendorPassword)
+      if (this.vendorId.trim() && this.vendorPassword.trim()) {
+        // Navigate to dashboard with vendor type
+        this.$router.push({
+          name: 'dashboard',
+          params: {
+            type: 'vendor',
+            identifier: this.vendorId
+          }
+        })
+      }
     },
     toggleLoginType() {
       this.isVendorLogin = !this.isVendorLogin
