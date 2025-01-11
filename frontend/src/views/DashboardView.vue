@@ -8,7 +8,32 @@
       </div>
     </header>
     <main class="dashboard-content">
-      <p>Dashboard content coming soon...</p>
+      <template>
+        <div class="fixed inset-0 flex">
+          <!-- Side bookmarks -->
+          <div class="relative">
+            <!-- Bookmark tabs -->
+            <div class="absolute left-0 flex flex-col gap-2 -translate-x-full py-4">
+              <button v-for="(tab, index) in tabs" :key="index" @click="activeTab = index"
+                class="flex items-center bg-white shadow-md rounded-l-lg px-4 py-2 transition-all" :class="[
+                  activeTab === index
+                    ? 'translate-x-0 bg-blue-50'
+                    : '-translate-x-2 hover:translate-x-0'
+                ]">
+                {{ tab.label }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Main content area -->
+          <div class="flex-1 bg-white shadow-lg p-8">
+            <component :is="currentComponent" v-if="currentComponent" />
+            <div v-else class="text-gray-500">
+              Select a tab to view content
+            </div>
+          </div>
+        </div>
+      </template>
     </main>
   </div>
 </template>
@@ -19,7 +44,8 @@ export default {
   data() {
     return {
       userType: '',
-      userIdentifier: ''
+      userIdentifier: '',
+      activeTab: null
     }
   },
   created() {

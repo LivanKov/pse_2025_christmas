@@ -11,12 +11,20 @@
               <div class="indicator-highlight" :class="{ 'vendor': isVendorLogin }"></div>
             </div>
             <div class="indicator-labels">
-              <span :class="{ 'active': !isVendorLogin }">Customer</span>
-              <span :class="{ 'active': isVendorLogin }">Vendor</span>
+              <span 
+                :class="{ 'active': !isVendorLogin }" 
+                @click="isVendorLogin = false"
+                class="clickable"
+              >Customer</span>
+              <span 
+                :class="{ 'active': isVendorLogin }" 
+                @click="isVendorLogin = true"
+                class="clickable"
+              >Vendor</span>
             </div>
           </div>
           <div class="snowflake-icon">❄️</div>
-          <h1>Welcome Back</h1>
+          <h1>Welcome to 2025 PSE Christmas Market!</h1>
           
           <!-- Customer Login Form -->
           <form v-if="!isVendorLogin" @submit.prevent="handleLogin" class="login-form">
@@ -25,6 +33,14 @@
                 type="email" 
                 v-model="email" 
                 placeholder="Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                v-model="username"
+                placeholder="Full Name"
                 required
               />
             </div>
@@ -55,15 +71,6 @@
               Sign In as Vendor
             </button>
           </form>
-
-          <div class="login-options">
-            <div class="forgot-password">
-              <a href="#">Forgot your password?</a>
-            </div>
-            <button @click="toggleLoginType" class="toggle-login-button">
-              {{ isVendorLogin ? 'Customer? Click here!' : 'Vendor? Click here!' }}
-            </button>
-          </div>
         </div>
       </div>
       <div class="ground">
@@ -116,7 +123,7 @@ function toggleLoginType() {
 .app-container {
   min-height: 100vh;
   background: linear-gradient(180deg, 
-    #a8e6ff 0%, 
+    #62b0cf 0%, 
     #ECF0F1 60%, 
     #FFFFFF 60%, 
     #FFFFFF 100%
@@ -339,15 +346,19 @@ input:focus {
 
 .indicator-labels {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 8px;
-  padding: 0 10px;
 }
 
 .indicator-labels span {
   font-size: 14px;
   color: #999;
   transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.indicator-labels span:hover {
+  color: var(--accent-color);
 }
 
 .indicator-labels span.active {
