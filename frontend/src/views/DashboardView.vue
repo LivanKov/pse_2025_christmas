@@ -8,38 +8,16 @@
       </div>
     </header>
     <main class="dashboard-content">
-      <template>
-        <div class="fixed inset-0 flex">
-          <!-- Side bookmarks -->
-          <div class="relative">
-            <!-- Bookmark tabs -->
-            <div class="absolute left-0 flex flex-col gap-2 -translate-x-full py-4">
-              <button v-for="(tab, index) in tabs" :key="index" @click="activeTab = index"
-                class="flex items-center bg-white shadow-md rounded-l-lg px-4 py-2 transition-all" :class="[
-                  activeTab === index
-                    ? 'translate-x-0 bg-blue-50'
-                    : '-translate-x-2 hover:translate-x-0'
-                ]">
-                {{ tab.label }}
-              </button>
-            </div>
-          </div>
-
-          <!-- Main content area -->
-          <div class="flex-1 bg-white shadow-lg p-8">
-            <component :is="currentComponent" v-if="currentComponent" />
-            <div v-else class="text-gray-500">
-              Select a tab to view content
-            </div>
-          </div>
-        </div>
-      </template>
+      <button @click="check" class="logout-button">Check Axios</button>
     </main>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+
   name: 'DashboardView',
   data() {
     return {
@@ -58,6 +36,11 @@ export default {
     handleLogout() {
       // Navigate back to home
       this.$router.push('/')
+    },
+    check() {
+      axios.get('http://localhost:8080/api/hello')
+        .then(response => console.log(response))
+        .catch(error => console.error(error))
     }
   }
 }
